@@ -8,23 +8,28 @@ export class Inicio extends Component {
                 <div className="container-fluid">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" href="/Inicio">Inicio</a>
+                            <a className="nav-link active" href="/">Inicio</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/Listar">Listar Usuarios</a>
+                            <a className="nav-link active" href="/ListarUsuarios">Listar</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="/">Disabled</a>
+                            <a className="nav-link active" href="/Casas">Casas</a>
                         </li>
+                        {/* <li className="nav-item">
+                            <a className="nav-link active" href="/">Reserva</a>
+                        </li> <li className="nav-item">
+                            <a className="nav-link active" href="/">Reserva</a>
+                        </li> */}
                     </ul>
                 </div>
                 <div>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="/Login">Login</a>
+                            <a className="nav-link" href="/Login">Iniciar Sesión</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Logout</a>
+                            <a className="nav-link" href="/">Cerrar Seción</a>
                         </li>
                     </ul>
 
