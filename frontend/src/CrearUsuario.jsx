@@ -13,8 +13,8 @@ class CrearUsuario extends Component {
     }
 
     handleInputChange = (event) => {
-        const { id, value } = event.target;
-        this.setState({ [id]: value });
+        const { name, value } = event.target; // Use 'name' instead of 'id'
+        this.setState({ [name]: value });
     };
 
     handleSubmit = (event) => {
@@ -61,7 +61,7 @@ class CrearUsuario extends Component {
                         <input
                             type="text"
                             className="form-control"
-                            id="nickname"
+                            name="nickname" // Use 'name' instead of 'id'
                             placeholder="Nombre"
                             onChange={this.handleInputChange}
                         />
@@ -72,7 +72,7 @@ class CrearUsuario extends Component {
                             <input
                                 type="email"
                                 className="form-control"
-                                id="email"
+                                name="email" // Use 'name' instead of 'id'
                                 placeholder="email Electrónico"
                                 onChange={this.handleInputChange}
                             />
@@ -82,7 +82,7 @@ class CrearUsuario extends Component {
                             <input
                                 type="password"
                                 className="form-control"
-                                id="password"
+                                name="password" // Use 'name' instead of 'id'
                                 placeholder="password"
                                 onChange={this.handleInputChange}
                             />
@@ -92,7 +92,7 @@ class CrearUsuario extends Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="Telefono"
+                                name="Telefono" // Use 'name' instead of 'id'
                                 placeholder="Teléfono"
                                 onChange={this.handleInputChange}
                             />

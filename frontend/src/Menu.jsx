@@ -17,7 +17,7 @@ function Menu() {
     function logout() {
         sessionStorage.removeItem('token');
         setToken("");
-        // navigate("/");
+        navigate("/");
     }
 
     if (token !== "" && token !== null) {
@@ -30,10 +30,7 @@ function Menu() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link to="/listarUsuarios" className='nav-link'>Listar Usuario</Link>
-                            </li>
+                        <ul className="navbar-nav">              
                             <li className="nav-item">
                                 <Link to="/reserva" className='nav-link'>Reservas</Link>
                             </li>
@@ -41,10 +38,20 @@ function Menu() {
                                 <Link to="/casas" className='nav-link'>Casas</Link>
                             </li>
                             <li className="nav-item">
+                                <Link to="/Usuarios" className='nav-link'>usuarios</Link>
+                            </li>
+                            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+                    <div className="container">
+                        <button className='btn btn-outline-danger btn-sm' onClick={() => logout()}>
+                            Logout
+                        </button>
+                    </div>
+                </nav>
+                            {/* <li className="nav-item">
                                 <button className='btn btn-outline-danger btn-sm' onClick={() => logout()}>
                                     Logout
                                 </button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
@@ -53,20 +60,14 @@ function Menu() {
     } else {
         return (
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container">
-                    <Link to="/" className='navbar-brand'>Inicio</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link to="/login" className='nav-link'>Login</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <div className="container">
+                <Link to="/Login" className='btn btn-primary rounded-circle' style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                    <span className="material-symbols-outlined">
+                        Login
+                    </span>
+                </Link>
+            </div>
+        </nav>
         );
     }
 }
