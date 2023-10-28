@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Reserva from './Reserva';
 import Casas from './Casas';
 import CrearUsuario from './CrearUsuario';
+import Usuarios from './Usuarios';
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
           <Route path="/Reserva" element={<Reserva />}></Route>
           <Route path="/" element={<Inicio lastName="Lucas" />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/Usuarios" element={<Usuarios />}></Route>
           {/* <Route path="/texto/:text" element={<Texto />} />
         */}
         </Routes>

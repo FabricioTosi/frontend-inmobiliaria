@@ -45,19 +45,19 @@ function Menu() {
                             <li className="nav-item">
                                 <Link to="/Usuarios" className='nav-link'>usuarios</Link>
                             </li>
-                            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                                <div className="container">
-                                    <div className="btn-group" style={{ position: 'absolute', top: '10px', right: '10px' }}>
-                                        <button className='btn btn-danger rounded-circle ml-2' onClick={() => logout()}>
-                                            <span className="material-symbols-outlined">
-                                                Logout
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </nav>
                         </ul>
                     </div>
+                    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+                        <div className="container">
+                            <div className="btn-group" style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                                <button className='btn btn-danger rounded-circle ml-2' onClick={() => logout()}>
+                                    <span className="material-symbols-outlined">
+                                        Logout
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </nav>
         );
