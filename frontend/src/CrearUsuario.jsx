@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CrearUsuario extends Component {
     constructor(props) {
@@ -7,34 +9,36 @@ class CrearUsuario extends Component {
         this.state = {
             email: '',
             password: '',
-            Telefono: '',
-            nickname: '', // Agregar campo nickname al estado
+            telefono: '',
+            nickname: '',
         };
     }
 
     handleInputChange = (event) => {
-        const { name, value } = event.target; // Use 'name' instead of 'id'
+        const { name, value } = event.target;
         this.setState({ [name]: value });
+    };
+
+    redirectToHome = () => {
+        // Redirigir al usuario a la página principal ("/")
+        window.location.href = '/Login';
     };
 
     handleSubmit = (event) => {
         event.preventDefault();
 
-        // Validar si el campo nickname está vacío
         if (!this.state.nickname) {
             alert("El campo 'nickname' es obligatorio");
             return;
         }
 
-        // Crear un objeto con los datos del formulario
         const usuarioData = {
             email: this.state.email,
             password: this.state.password,
-            Telefono: this.state.Telefono,
+            telefono: this.state.telefono,
             nickname: this.state.nickname,
         };
 
-        // Realizar la solicitud Fetch para enviar los datos al servidor
         fetch('http://localhost:8080/api/usuario', {
             method: 'POST',
             headers: {
@@ -44,7 +48,21 @@ class CrearUsuario extends Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
+                this.redirectToHome();
+                toast.success("Usuario creado exitosamente", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+                // Redirigir al usuario a la página principal
+                this.redirectToHome();
+
                 console.log('Usuario creado exitosamente:', data);
             })
             .catch((error) => {
@@ -88,11 +106,11 @@ class CrearUsuario extends Component {
                             />
                         </div>
                         <div className="form-group col-md-6">
-                            <label htmlFor="Telefono">Teléfono</label>
+                            <label htmlFor="telefono">Teléfono</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                name="Telefono" // Use 'name' instead of 'id'
+                                name="telefono" // Use 'name' instead of 'id'
                                 placeholder="Teléfono"
                                 onChange={this.handleInputChange}
                             />
