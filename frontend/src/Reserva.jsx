@@ -6,7 +6,8 @@ const Table = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedReserva, setSelectedReserva] = useState({});
   const [editedReserva, setEditedReserva] = useState({});
-  const [newReserva, setNewReserva] = useState({}); // Nuevo estado para la reserva a crear
+  const [newReserva, setNewReserva] = useState({
+    fecha_reserva: new Date().toISOString().split('T')[0],}); // Nuevo estado para la reserva a crear
 
   useEffect(() => {
     fetchData();
@@ -77,7 +78,7 @@ const Table = () => {
   };
 
   const handleCreate = () => {
-    // Enviar los datos de la nueva reserva al servidor (ajusta la URL y los datos según tu API)
+    // Envía los datos de la nueva reserva al servidor (ajusta la URL y los datos según tu API)
     fetch('http://localhost:8080/reserva', {
       method: 'POST',
       headers: {
@@ -89,8 +90,8 @@ const Table = () => {
         if (response.ok) {
           fetchData();
           setShowModal(false);
-          // Restablecer el estado del nuevo reserva
-          setNewReserva({});
+          // Restablece el estado del nuevo reserva con la fecha actual
+          // setNewReserva({ fecha_reserva: new Date().toISOString().split('T')[0] });
         } else {
           console.error('Network response was not ok');
         }
@@ -119,11 +120,11 @@ const Table = () => {
           </thead>
           <tbody>
             {data.map((reserva) => (
-              <tr key={reserva.id}>
-                <td>{reserva.id}</td>
-                <td>{reserva.fecha_reserva}</td>
-                <td>{reserva.fecha_inicio}</td>
-                <td>{reserva.fecha_fin}</td>
+              <tr key={reserva.id_reserva}>
+                <td>{reserva.id_reserva}</td>
+                <td>{new Date(reserva.fecha_reserva).toLocaleDateString()}</td>
+                <td>{new Date(reserva.fecha_inicio).toLocaleDateString()}</td>
+                <td>{new Date(reserva.fecha_fin).toLocaleDateString()}</td>
                 <td>{reserva.casa_id_casa}</td>
                 <td>{reserva.usuario_id_usuario}</td>
                 <td>
@@ -180,7 +181,7 @@ const Table = () => {
               Cerrar
             </Button>
             <Button variant="primary" onClick={handleCreate}>
-              Guardar Nueva Reserva
+              Guardar Reserva
             </Button>
           </Modal.Footer>
         </Modal>
