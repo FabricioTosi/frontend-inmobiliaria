@@ -149,7 +149,7 @@ export class InternalLogin extends Component {
                 value="Ingresar"
               />
 
-              <div class="text-center">
+              <div className="text-center">
                 <p>¿No es miembro? <a href="/CrearUsuario">Registrarse</a></p>
               </div>
             </form>

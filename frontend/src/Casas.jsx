@@ -34,6 +34,9 @@ const Table = () => {
       });
   };
 
+  // crear funcion para agregar imagenes
+  // const handleImagen
+
   const handleDelete = (id) => {
     fetch(`http://localhost:8080/casa/${id}`, {
       method: 'DELETE',
@@ -79,6 +82,39 @@ const Table = () => {
       });
   };
 
+  const handleUploadImage = (id_casa) => {
+    // Aquí puedes abrir un cuadro de diálogo para que el usuario ingrese o pegue la URL de la imagen.
+    const imageUrl = prompt('Ingrese la URL de la imagen');
+  
+    if (imageUrl) {
+      // Crear un objeto que contenga la URL de la imagen y el id_casa
+      const imageData = {
+        id_casa,
+        imageUrl,
+      };
+  
+      fetch('http://localhost:8080/imagenes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(imageData),
+      })
+        .then((response) => {
+      console.log(response);
+          if (response.ok) {
+            // La URL de la imagen se ha enviado correctamente, puedes realizar alguna acción adicional si es necesario.
+          } else {
+           
+            console.error('Error al enviar la URL de la imagen');
+          }
+        })
+        .catch((error) => {
+          console.error('Error al enviar la URL de la imagen:', error);
+        });
+    }};
+
+
   return (
     <>
     <h1>CASAS DISPONIBLES 👍</h1>
@@ -105,6 +141,7 @@ const Table = () => {
               <td>
                 <button className='btn btn-danger' onClick={() => handleDelete(casa.id_casa)}>Eliminar</button>
                 <button className='btn btn-primary' onClick={() => handleEdit(casa)}>Editar</button>
+                <button className='btn btn-success' onClick={() => handleUploadImage(casa.id_casa)}>Cargar Imagen</button>
               </td>
             </tr>
           ))}

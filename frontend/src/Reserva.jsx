@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 const Table = () => {
@@ -135,7 +136,7 @@ const Table = () => {
             ))}
           </tbody>
         </table>
-        <Button variant="success" onClick={() => setShowModal(true)}>Crear Reserva</Button>
+        <Link to="/ReservaCreate" className="btn btn-success">Crear Reserva</Link>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Editar reserva</Modal.Title>
@@ -148,6 +149,7 @@ const Table = () => {
                   type="date"
                   value={newReserva.fecha_reserva}
                   onChange={(e) => setNewReserva({ ...newReserva, fecha_reserva: e.target.value })}
+                  readOnly
                 />
               </Form.Group>
               <Form.Group>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class CrearUsuario extends Component {
+class CrearAdmin extends Component {
     constructor(props) {
         super(props);
 
@@ -11,18 +11,13 @@ class CrearUsuario extends Component {
             password: '',
             telefono: '',
             nickname: '',
-            rol_id_rol: '2',
+            rol_id_rol:'1',
         };
     }
 
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
-    };
-
-    redirectToHome = () => {
-        // Redirigir al usuario a la página principal ("/")
-        window.location.href = '/Login';
     };
 
     handleSubmit = (event) => {
@@ -38,7 +33,7 @@ class CrearUsuario extends Component {
             password: this.state.password,
             telefono: this.state.telefono,
             nickname: this.state.nickname,
-            rol_id_rol:2, 
+            rol_id_rol: this.state.rol_id_rol,
         };
 
         fetch('http://localhost:8080/api/usuario', {
@@ -50,8 +45,7 @@ class CrearUsuario extends Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                this.redirectToHome();
-                toast.success("Usuario creado exitosamente", {
+                                toast.success("Administrador creado exitosamente", {
                     position: "bottom-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -63,18 +57,18 @@ class CrearUsuario extends Component {
                 });
 
                 // Redirigir al usuario a la página principal
-                this.redirectToHome();
-
-                console.log('Usuario creado exitosamente:', data);
+               
+                console.log('Administrador creado exitosamente:', data);
             })
             .catch((error) => {
-                console.error('Error al crear el usuario:', error);
+                console.error('Error al crear el administrador:', error);
             });
     }
 
     render() {
         return (
             <>
+            <h1>Crear administrador</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group col-md-6">
                         <label htmlFor="nickname">Nombre</label>
@@ -117,6 +111,16 @@ class CrearUsuario extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
+                        <div className="form-group col-md-6">
+                        <label htmlFor="nickname">rol</label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="id_rol" // Use 'name' instead of 'id'
+                            placeholder="id_rol"
+                            onChange={this.handleInputChange}
+                        />
+                    </div>
 
                         <button type="submit" className="btn btn-primary">
                             Crear
@@ -128,4 +132,4 @@ class CrearUsuario extends Component {
     }
 }
 
-export default CrearUsuario;
+export default CrearAdmin;

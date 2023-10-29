@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 
 
 const Table = () => {
@@ -123,6 +123,8 @@ const Table = () => {
                         ))}
                     </tbody>
                 </table>
+                <Link to="/CrearUsuario" className="btn btn-success">Crear Usuario</Link>
+                <Link to="/CrearAdmin" className="btn btn-primary">Crear Admin</Link>
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Editar usuario</Modal.Title>
