@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import './Casas.css'; // Importa el archivo de estilos
 
 const token = sessionStorage.getItem('token');
 
@@ -20,7 +21,7 @@ const Table = () => {
     console.log("Token:", token); // Imprimir el token en la consola
     fetchData();
   }, [token]);
-  
+
   const fetchData = () => {
     const token = sessionStorage.getItem('token');
     console.log("Token:", token); // Imprimir el token en la consola
@@ -32,7 +33,7 @@ const Table = () => {
         console.error('Error fetching data:', error);
       });
   };
-  
+
   const fetchCasaData = (token) => {
     return fetch('http://localhost:8080/casa', {
       headers: {
@@ -110,7 +111,7 @@ const Table = () => {
     if (url) {
       const imageData = {
         url,
-        id_casa,        
+        id_casa,
       };
 
       const parametros = {
@@ -187,10 +188,10 @@ const Table = () => {
 
   return (
 
-    <>
+    <div className="casas-container"> {/* Aplica el estilo del contenedor principal */}
       <h1>CASAS DISPONIBLES 👍</h1>
       <div className="table-responsive">
-        <table className="table table-striped">
+        <table className="casas-table table table-striped"> {/* Aplica el estilo de la tabla */}
           <thead>
             <tr>
               <th>id_casa</th>
@@ -203,24 +204,22 @@ const Table = () => {
           </thead>
           <tbody>
             {data.map((casa) => (
-              <tr key={casa.id_casa}>
-                <td>{casa.id_casa}</td>
-                <td>{casa.descripcion}</td>
-                <td>{casa.precio_compra}</td>
-                <td>{casa.superficie}</td>
-                <td>{casa.precio_alquiler}</td>
-                <td>
-                  <button className='btn btn-danger' onClick={() => handleDelete(casa.id_casa)}>Eliminar</button>
-                  <button className='btn btn-primary' onClick={() => handleEdit(casa)}>Editar</button>
-                  <button className='btn btn-success' onClick={() => handleUploadImage(casa.id_casa)}>Cargar Imagen</button>
+              <tr key={casa.id_casa} className="casas-row"> {/* Aplica el estilo de las filas */}
+                <td className="casas-cell">{casa.id_casa}</td>
+                <td className="casas-cell">{casa.descripcion}</td>
+                <td className="casas-cell">{casa.precio_compra}</td>
+                <td className="casas-cell">{casa.superficie}</td>
+                <td className="casas-cell">{casa.precio_alquiler}</td>
+                <td className="casas-cell">
+                  <i className="fas fa-trash casas-icon-delete" onClick={() => handleDelete(casa.id_casa)}></i>
+                  <i className="fas fa-edit casas-icon-edit" onClick={() => handleEdit(casa)}></i>
+                  <i className="fas fa-image casas-icon-upload" onClick={() => handleUploadImage(casa.id_casa)}></i>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <button className="btn btn-success" onClick={handleCreateCasa}>
-          Crear Casa
-        </button>
+        <button className="btn btn-success casas-button" onClick={handleCreateCasa}>Crear Casa</button>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Editar Casa</Modal.Title>
@@ -322,7 +321,7 @@ const Table = () => {
           </Modal.Footer>
         </Modal>
       </div>
-    </>
+    </div>
   );
 };
 

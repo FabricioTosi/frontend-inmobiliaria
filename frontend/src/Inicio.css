@@ -1,0 +1,111 @@
+/* Estilo para el contenedor principal */
+.inicio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Estilo para las tarjetas de casa */
+.inicio-card {
+  width: 300px;
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+/* Estilo para las imágenes de casa */
+.inicio-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Estilo para el título de la casa */
+.inicio-card .card-title {
+  font-size: 18px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Estilo para la información de la casa */
+.inicio-card .card-text {
+  text-align: center;
+}
+
+/* Estilo para los botones de Comprar y Alquilar */
+.inicio-card .btn {
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 0;
+}
+
+/* Estilo para los mensajes de éxito */
+.compra-exitosa, .alquiler-exitoso {
+  text-align: center;
+  font-size: 18px;
+  color: #28a745;
+  margin: 10px 0;
+}
+
+/* Estilo para el título principal */
+.inicio-text {
+  font-size: 24px;
+  text-align: center;
+  margin: 20px 0;
+}
+/* Agrega estilos para el contenedor principal */
+.inicio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Estilos para las tarjetas de casas */
+.inicio-card {
+  width: calc(33.33% - 20px); /* Aproximadamente tres columnas por fila */
+  margin-bottom: 20px;
+}
+
+/* Estilos para la imagen de la casa */
+.inicio-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos para los títulos de las tarjetas */
+.inicio-card .card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Estilos para el texto de las tarjetas */
+.inicio-card .card-text {
+  font-size: 1rem;
+}
+
+/* Estilos para los botones Comprar y Alquilar */
+.inicio-card .btn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Estilos para los mensajes de compra y alquiler exitosos */
+.compra-exitosa, .alquiler-exitoso {
+  text-align: center;
+  font-size: 1.2rem;
+  color: green;
+  margin: 10px 0;
+}
+
+/* Estilos para el texto de carga */
+.inicio-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Agrega otros estilos personalizados según tus preferencias */

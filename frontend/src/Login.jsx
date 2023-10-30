@@ -1,7 +1,43 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './login.css';
+
+function LoginForm({ state, handleChange, handleSubmit }) {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-floating">
+        <input
+          type="text"
+          className="form-control"
+          id="nickname"
+          onChange={handleChange}
+          value={state.nickname}
+          name='nickname'
+        />
+        <label htmlFor="nickname">Usuario</label>
+      </div>
+      <br />
+      <div className="form-floating">
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          onChange={handleChange}
+          value={state.password}
+          name='password'
+        />
+        <label htmlFor="password">Contraseña</label>
+      </div>
+      <br />
+      <input className='btn btn-primary' type="submit" value="Ingresar" />
+      <div className="text-center">
+        <p>¿No es miembro? <a href="/CrearUsuario">Registrarse</a></p>
+      </div>
+    </form>
+  );
+}
 
 function InternalLogin({ navigate }) {
   const [state, setState] = useState({
@@ -9,8 +45,27 @@ function InternalLogin({ navigate }) {
     password: ''
   });
 
+  const showToast = (message, options = {}) => {
+    toast(message, {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      ...options,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!state.nickname || !state.password) {
+      showToast("Por favor, complete todos los campos.", { type: "error" });
+      return;
+    }
 
     const usuario = {
       nickname: state.nickname,
@@ -37,46 +92,15 @@ function InternalLogin({ navigate }) {
       })
       .then((result) => {
         if (result.ok) {
-          // Guardar el token y el id_usuario en sessionStorage
           sessionStorage.setItem('token', result.body.token);
-          
-          
-          
-          toast.success("¡Bienvenido!", {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          showToast("¡Bienvenido!");
           navigate("/");
         } else {
-          toast.error(result.body.message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          showToast(result.body.message, { type: "error" });
         }
       })
       .catch((error) => {
-        toast.error(error.message, {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        showToast(error.message, { type: "error" });
       });
   }
 
@@ -89,50 +113,10 @@ function InternalLogin({ navigate }) {
 
   return (
     <div className='container conFondo'>
-      <div className='row'>
-        <div className='col'>
-          <h1>Iniciar Sesión</h1>
-        </div>
-      </div>
-
-      <div className='row'>
-        <div className='col'>
-          <form onSubmit={handleSubmit}>
-            <div className="form-floating">
-              <input
-                type="text"
-                className="form-control"
-                id="nickname"
-                onChange={handleChange}
-                value={state.nickname}
-                name='nickname'
-              />
-              <label htmlFor="nickname">Usuario</label>
-            </div>
-            <br />
-            <div className="form-floating">
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                onChange={handleChange}
-                value={state.password}
-                name='password'
-              />
-              <label htmlFor="password">Contraseña</label>
-            </div>
-            <br />
-            <input className='btn btn-primary' type="submit" value="Ingresar" />
-            <div className="text-center">
-              <p>¿No es miembro? <a href="/CrearUsuario">Registrarse</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
+      <LoginForm state={state} handleChange={handleChange} handleSubmit={handleSubmit} />
     </div>
   );
 }
-
 
 function Login() {
   const p = useParams();

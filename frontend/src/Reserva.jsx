@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
+import './Reserva.css';
 
 const Table = () => {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedReserva, setSelectedReserva] = useState({});
-  const [editedReserva, setEditedReserva] = useState({});
-  const [newReserva, setNewReserva] = useState({
-    fecha_reserva: new Date().toISOString().split('T')[0],}); // Nuevo estado para la reserva a crear
+  const [selectedReserva, setSelectedReserva] = useState(null);
+  const [formData, setFormData] = useState({
+    fecha_reserva: new Date().toISOString().split('T')[0],
+    fecha_inicio: '',
+    fecha_fin: '',
+    casa_id_casa: '',
+    usuario_id_usuario: '',
+  });
 
   useEffect(() => {
     fetchData();
@@ -54,53 +59,52 @@ const Table = () => {
 
   const handleEdit = (reserva) => {
     setSelectedReserva(reserva);
-    setEditedReserva({ ...reserva });
+    setFormData(reserva);
     setShowModal(true);
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:8080/reserva/${selectedReserva.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(editedReserva),
-    })
-      .then((response) => {
-        if (response.ok) {
-          fetchData();
-          setShowModal(false);
-        } else {
-          console.error('Network response was not ok');
-        }
+    if (selectedReserva) {
+      // Estás editando una reserva existente
+      fetch(`http://localhost:8080/reserva/${selectedReserva.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-      .catch((error) => {
-        console.error('Error saving data:', error);
-      });
-  };
-
-  const handleCreate = () => {
-    // Envía los datos de la nueva reserva al servidor (ajusta la URL y los datos según tu API)
-    fetch('http://localhost:8080/reserva', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newReserva),
-    })
-      .then((response) => {
-        if (response.ok) {
-          fetchData();
-          setShowModal(false);
-          // Restablece el estado del nuevo reserva con la fecha actual
-          // setNewReserva({ fecha_reserva: new Date().toISOString().split('T')[0] });
-        } else {
-          console.error('Network response was not ok');
-        }
+        .then((response) => {
+          if (response.ok) {
+            fetchData();
+            setShowModal(false);
+          } else {
+            console.error('Network response was not ok');
+          }
+        })
+        .catch((error) => {
+          console.error('Error saving data:', error);
+        });
+    } else {
+      // Estás creando una nueva reserva
+      fetch('http://localhost:8080/reserva', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-      .catch((error) => {
-        console.error('Error creating data:', error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            fetchData();
+            setShowModal(false);
+          } else {
+            console.error('Network response was not ok');
+          }
+        })
+        .catch((error) => {
+          console.error('Error creating data:', error);
+        });
+    }
   };
 
   return (
@@ -130,8 +134,8 @@ const Table = () => {
                 <td>{reserva.casa_id_casa}</td>
                 <td>{reserva.usuario_id_usuario}</td>
                 <td>
-                  <button className='btn btn-danger' onClick={() => handleDelete(reserva.id_reserva)}>Eliminar</button>
-                  <button className='btn btn-primary' onClick={() => handleEdit(reserva)}>Editar</button>
+                  <i className="fas fa-trash reservas-icon-delete" onClick={() => handleDelete(reserva.id_reserva)}></i>
+                  <i className="fas fa-edit reservas-icon-edit" onClick={() => handleEdit(reserva)}></i>
                 </td>
               </tr>
             ))}
@@ -140,7 +144,7 @@ const Table = () => {
         <Link to="/ReservaCreate" className="btn btn-success">Crear Reserva</Link>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>Editar reserva</Modal.Title>
+            <Modal.Title>{selectedReserva ? 'Editar reserva' : 'Crear reserva'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -148,33 +152,41 @@ const Table = () => {
                 <Form.Label>Fecha de reserva</Form.Label>
                 <Form.Control
                   type="date"
-                  value={newReserva.fecha_reserva}
-                  onChange={(e) => setNewReserva({ ...newReserva, fecha_reserva: e.target.value })}
-                  readOnly
+                  value={formData.fecha_reserva}
+                  onChange={(e) => setFormData({ ...formData, fecha_reserva: e.target.value })}
+                  readOnly={selectedReserva}
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Fecha de inicio</Form.Label>
                 <Form.Control
                   type="date"
-                  value={newReserva.fecha_inicio}
-                  onChange={(e) => setNewReserva({ ...newReserva, fecha_inicio: e.target.value })}
+                  value={formData.fecha_inicio}
+                  onChange={(e) => setFormData({ ...formData, fecha_inicio: e.target.value })}
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Fecha de final</Form.Label>
                 <Form.Control
                   type="date"
-                  value={newReserva.fecha_fin}
-                  onChange={(e) => setNewReserva({ ...newReserva, fecha_fin: e.target.value })}
+                  value={formData.fecha_fin}
+                  onChange={(e) => setFormData({ ...formData, fecha_fin: e.target.value })}
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Id de la casa</Form.Label>
                 <Form.Control
                   type="text"
-                  value={newReserva.casa_id_casa}
-                  onChange={(e) => setNewReserva({ ...newReserva, casa_id_casa: e.target.value })}
+                  value={formData.casa_id_casa}
+                  onChange={(e) => setFormData({ ...formData, casa_id_casa: e.target.value })}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Id del usuario</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={formData.usuario_id_usuario}
+                  onChange={(e) => setFormData({ ...formData, usuario_id_usuario: e.target.value })}
                 />
               </Form.Group>
             </Form>
@@ -183,7 +195,7 @@ const Table = () => {
             <Button variant="secondary" onClick={() => setShowModal(false)}>
               Cerrar
             </Button>
-            <Button variant="primary" onClick={handleCreate}>
+            <Button variant="primary" onClick={handleSave}>
               Guardar Reserva
             </Button>
           </Modal.Footer>

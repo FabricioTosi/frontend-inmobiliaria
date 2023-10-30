@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './CrearUsuario.css'; // Importa el archivo de estilos
 
 class CrearAdmin extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ class CrearAdmin extends Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                                toast.success("Administrador creado exitosamente", {
+                toast.success("Administrador creado exitosamente", {
                     position: "bottom-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -57,7 +58,7 @@ class CrearAdmin extends Component {
                 });
 
                 // Redirigir al usuario a la página principal
-               
+
                 console.log('Administrador creado exitosamente:', data);
             })
             .catch((error) => {
@@ -67,10 +68,10 @@ class CrearAdmin extends Component {
 
     render() {
         return (
-            <>
-            <h1>Crear administrador</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group col-md-6">
+            <div className="crear-usuario-container"> {/* Aplica el estilo del contenedor */}
+                <h1 className="inicio-text">Crear administrador</h1> {/* Aplica el estilo del título */}
+                <form onSubmit={this.handleSubmit} className="crear-usuario-form"> {/* Aplica el estilo del formulario */}
+                    <div className="form-group crear-usuario-input"> {/* Aplica el estilo de los campos de entrada */}
                         <label htmlFor="nickname">Nombre</label>
                         <input
                             type="text"
@@ -81,7 +82,7 @@ class CrearAdmin extends Component {
                         />
                     </div>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="email">email</label>
                             <input
                                 type="email"
@@ -91,7 +92,7 @@ class CrearAdmin extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="password">password</label>
                             <input
                                 type="password"
@@ -101,7 +102,7 @@ class CrearAdmin extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="telefono">Teléfono</label>
                             <input
                                 type="text"
@@ -111,14 +112,12 @@ class CrearAdmin extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                       
-
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="crear-usuario-button btn btn-primary"> {/* Aplica el estilo del botón */}
                             Crear
                         </button>
                     </div>
                 </form>
-            </>
+            </div>
         );
     }
 }

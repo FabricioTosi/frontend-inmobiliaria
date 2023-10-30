@@ -1,0 +1,81 @@
+/* Casas.css */
+
+/* Estilo para el contenedor principal de la lista de casas */
+.casas-container {
+  background-color: #f5f5f5; /* Color de fondo */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilo para la tabla de casas */
+.casas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilo para las filas de la tabla */
+.casas-row {
+  border-bottom: 1px solid #ddd; /* Línea divisoria entre filas */
+}
+
+/* Estilo para las celdas de la tabla */
+.casas-cell {
+  padding: 10px;
+}
+
+/* Estilo para los botones de eliminar y editar con iconos */
+.casas-button {
+  display: flex;
+  align-items: center;
+  background-color: #dc3545; /* Color de fondo del botón de eliminar */
+  color: #fff; /* Color del texto del botón de eliminar */
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.casas-button.edit {
+  background-color: #007BFF; /* Color de fondo del botón de editar */
+}
+
+/* Estilo para el botón de guardar cambios en la edición */
+.casas-save-button {
+  background-color: #28a745; /* Color de fondo del botón de guardar cambios */
+}
+
+/* Estilo para el botón de cerrar el modal de edición */
+.casas-close-button {
+  background-color: #6c757d; /* Color de fondo del botón de cerrar el modal */
+}
+
+/* Agregar iconos a los botones con una clase para el ícono (puedes cambiar los iconos según tus preferencias) */
+.casas-button i,
+.casas-save-button i,
+.casas-close-button i {
+  margin-right: 5px; /* Espacio entre el ícono y el texto */
+}
+/* Estilo para los iconos de eliminar */
+.casas-icon-delete {
+  font-size: 24px;
+  color: #dc3545; /* Color del ícono de eliminar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+
+/* Estilo para los iconos de editar */
+.casas-icon-edit {
+  font-size: 24px;
+  color: #007BFF; /* Color del ícono de editar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+
+/* Estilo para los iconos de cargar imagen */
+.casas-icon-upload {
+  font-size: 24px;
+  color: #28a745; /* Color del ícono de cargar imagen */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}

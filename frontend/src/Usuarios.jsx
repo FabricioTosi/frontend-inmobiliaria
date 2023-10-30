@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import './Usuarios.css';
 
 const Table = () => {
     const [data, setData] = useState([]);
@@ -82,7 +82,7 @@ const Table = () => {
 
         // Actualizar el campo 'telefono' en 'editedusuario' con el valor numérico
         setEditedusuario({ ...editedusuario, telefono: telefonoValue });
-console.log(setEditedusuario);
+        console.log(setEditedusuario);
         fetch(`http://localhost:8080/api/usuario/${selectedusuario.id_usuario}`, {
             method: 'PUT',
             headers: {
@@ -130,8 +130,8 @@ console.log(setEditedusuario);
                                 <td>{usuario.telefono}</td>
                                 <td>{usuario.rol_id_rol}</td>
                                 <td>
-                                    <button className='btn btn-danger' onClick={() => handleDelete(usuario.id_usuario)}>Eliminar</button>
-                                    <button className='btn btn-primary' onClick={() => handleEdit(usuario)}>Editar</button>
+                                    <i className="fas fa-trash usuarios-icon-delete" onClick={() => handleDelete(usuario.id_usuario)}></i>
+                                    <i className="fas fa-edit usuarios-icon-edit" onClick={() => handleEdit(usuario)}></i>
                                 </td>
                             </tr>
                         ))}

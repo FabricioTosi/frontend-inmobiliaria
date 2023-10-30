@@ -1,0 +1,45 @@
+/* Estilos para el componente Menu - Versión llamativa */
+
+/* Estilo del fondo del navbar */
+.navbar {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Fondo con degradado azul */
+  padding: 10px 0; /* Aumenta el espacio en la parte superior e inferior del navbar */
+  border-bottom: 4px solid #dc3545; /* Borde inferior rojo */
+}
+
+/* Estilo para los enlaces del navbar */
+.navbar a.navbar-brand, .navbar a.nav-link {
+  color: #fff; /* Color del texto para los enlaces en el navbar */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 18px; /* Tamaño de fuente más grande */
+  margin-right: 20px; /* Espacio entre los enlaces */
+}
+
+/* Estilo del botón del menú desplegable */
+.navbar-toggler-icon {
+  background-color: #fff; /* Color del icono del botón del menú desplegable */
+  border: 2px solid #dc3545; /* Borde rojo */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 2px; /* Espacio dentro del icono */
+}
+
+/* Estilo para los enlaces del navbar al pasar el ratón por encima */
+.navbar a.nav-link:hover {
+  color: #dc3545; /* Color del texto de enlaces al pasar el ratón por encima */
+}
+
+/* Estilo del botón de logout en el menú */
+.navbar .btn-danger {
+  background-color: #dc3545; /* Color de fondo del botón de logout */
+  font-weight: bold; /* Texto en negrita */
+  border: 2px solid #fff; /* Borde blanco */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px 20px; /* Aumenta el tamaño del botón */
+  font-size: 16px; /* Tamaño de fuente */
+  margin-right: 20px; /* Espacio entre el botón y los enlaces */
+}
+
+/* Estilo del botón de logout en el menú al pasar el ratón por encima */
+.navbar .btn-danger:hover {
+  background-color: #bb2d3b; /* Color de fondo del botón de logout al pasar el ratón por encima */
+}

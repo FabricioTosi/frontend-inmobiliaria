@@ -1,0 +1,81 @@
+/* Estilos para el componente Usuarios */
+
+h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-danger, .btn-primary {
+    margin-right: 10px;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn-success:hover {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+    color: #fff;
+  }
+  
+  /* Estilo para los iconos de eliminar */
+.casas-icon-delete {
+  font-size: 24px;
+  color: #dc3545; /* Color del ícono de eliminar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+
+/* Estilo para los iconos de editar */
+.casas-icon-edit {
+  font-size: 24px;
+  color: #007BFF; /* Color del ícono de editar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+
+/* Estilo para los iconos de cargar imagen */
+.casas-icon-upload {
+  font-size: 24px;
+  color: #28a745; /* Color del ícono de cargar imagen */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+/* Estilo para los iconos de eliminar */
+.usuarios-icon-delete {
+  font-size: 24px;
+  color: #dc3545; /* Color del ícono de eliminar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}
+
+/* Estilo para los iconos de editar */
+.usuarios-icon-edit {
+  font-size: 24px;
+  color: #007BFF; /* Color del ícono de editar */
+  cursor: pointer;
+  margin-right: 10px; /* Espacio a la derecha del ícono */
+}

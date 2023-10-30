@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import bcrypt from 'bcryptjs';
+import './CrearUsuario.css'
 
 class CrearUsuario extends Component {
     constructor(props) {
@@ -77,58 +78,59 @@ class CrearUsuario extends Component {
                 console.error('Error al crear el usuario:', error);
             });
     }
+
     render() {
         return (
-            <>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group col-md-6">
+            <div className="crear-usuario-container"> 
+                <form onSubmit={this.handleSubmit} className="crear-usuario-form"> 
+                    <div className="form-group crear-usuario-input"> 
                         <label htmlFor="nickname">Nombre</label>
                         <input
                             type="text"
                             className="form-control"
-                            name="nickname" // Use 'name' instead of 'id'
+                            name="nickname"
                             placeholder="Nombre"
                             onChange={this.handleInputChange}
                         />
                     </div>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="email">email</label>
                             <input
                                 type="email"
                                 className="form-control"
-                                name="email" // Use 'name' instead of 'id'
+                                name="email"
                                 placeholder="email Electrónico"
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="password">password</label>
                             <input
                                 type="password"
                                 className="form-control"
-                                name="password" // Use 'name' instead of 'id'
+                                name="password"
                                 placeholder="password"
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group crear-usuario-input">
                             <label htmlFor="telefono">Teléfono</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                name="telefono" // Use 'name' instead of 'id'
+                                name="telefono"
                                 placeholder="Teléfono"
                                 onChange={this.handleInputChange}
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="crear-usuario-button btn btn-primary"> 
                             Crear
                         </button>
                     </div>
                 </form>
-            </>
+            </div>
         );
     }
 }
