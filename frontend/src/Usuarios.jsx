@@ -62,11 +62,13 @@ const Table = () => {
     };
 
     const handleEdit = (usuario) => {
+        console.log("Selected Usuario: ", usuario);
         setSelectedusuario(usuario);
         setEditedusuario({ ...usuario });
+
         setShowModal(true);
     };
-
+    
     const handleSave = () => {
         console.log('Datos editados:', editedusuario); // Agregar esta línea para imprimir los datos editados en la consola
         

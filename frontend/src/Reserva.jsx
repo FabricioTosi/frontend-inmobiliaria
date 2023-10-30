@@ -35,8 +35,9 @@ const Table = () => {
       });
   };
 
-  const handleDelete = (id) => {
-    fetch(`http://localhost:8080/reserva/${id}`, {
+  const handleDelete = (id_reserva) => {
+    console.log(id_reserva);
+    fetch(`http://localhost:8080/reserva/${id_reserva}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -129,7 +130,7 @@ const Table = () => {
                 <td>{reserva.casa_id_casa}</td>
                 <td>{reserva.usuario_id_usuario}</td>
                 <td>
-                  <button className='btn btn-danger' onClick={() => handleDelete(reserva.id)}>Eliminar</button>
+                  <button className='btn btn-danger' onClick={() => handleDelete(reserva.id_reserva)}>Eliminar</button>
                   <button className='btn btn-primary' onClick={() => handleEdit(reserva)}>Editar</button>
                 </td>
               </tr>

@@ -15,8 +15,6 @@ export class InternalLogin extends Component {
     }
   }
 
-  // handler invocado por el evento onSubmit() del formulario, aqui hay dos caminos posibles, un POST para la creacion o un PUT para la edicion
-  // eso lo diferenciamos mediante "this.props.params.vehiculo_id", acorde a su existencia debemos cambiar tanto la URL como el METHOD del fetch
   handleSubmit = (event) => {
     event.preventDefault()
 
@@ -48,7 +46,10 @@ export class InternalLogin extends Component {
         result => {
           if (result.ok) {
             sessionStorage.setItem('token', result.body.token)
-
+            console.log(result.body.token);
+            const getToken = () => {
+              return sessionStorage.getItem('token');
+            };
             toast.success("bienvenido", {
               position: "bottom-center",
               autoClose: 5000,
@@ -59,15 +60,7 @@ export class InternalLogin extends Component {
               progress: undefined,
               theme: "light",
             });
-
-            // var tokenDecoded = jwt_decode(result.body.token);
-
-            // if (tokenDecoded.rol === "Agente") {
-            //     this.props.navigate("/reservas")
-            // } else {
-            this.props.navigate("/")
-            // }
-
+            this.props.navigate("/")      
           } else {
             toast.error(result.body.message, {
               position: "bottom-center",
@@ -97,7 +90,8 @@ export class InternalLogin extends Component {
       );
   }
 
-
+  
+  
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }

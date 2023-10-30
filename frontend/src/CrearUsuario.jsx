@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import bcrypt from 'bcryptjs';
 
 class CrearUsuario extends Component {
     constructor(props) {
@@ -14,7 +15,6 @@ class CrearUsuario extends Component {
             rol_id_rol: '2',
         };
     }
-
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
@@ -25,6 +25,12 @@ class CrearUsuario extends Component {
         window.location.href = '/Login';
     };
 
+    hashPassword = (password) => {
+        // Hashea la contraseña utilizando bcryptjs
+        const saltRounds = 10; // Número de saltos
+        return bcrypt.hashSync(password, saltRounds);
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -33,12 +39,15 @@ class CrearUsuario extends Component {
             return;
         }
 
+        // Hashea la contraseña antes de enviarla al servidor
+        const hashedPassword = this.hashPassword(this.state.password);
+
         const usuarioData = {
             email: this.state.email,
-            password: this.state.password,
+            password: hashedPassword, // Envía la contraseña hasheada
             telefono: this.state.telefono,
             nickname: this.state.nickname,
-            rol_id_rol:2, 
+            rol_id_rol: 2,
         };
 
         fetch('http://localhost:8080/api/usuario', {
@@ -62,16 +71,12 @@ class CrearUsuario extends Component {
                     theme: "light",
                 });
 
-                // Redirigir al usuario a la página principal
-                this.redirectToHome();
-
                 console.log('Usuario creado exitosamente:', data);
             })
             .catch((error) => {
                 console.error('Error al crear el usuario:', error);
             });
     }
-
     render() {
         return (
             <>

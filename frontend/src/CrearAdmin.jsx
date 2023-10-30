@@ -33,7 +33,7 @@ class CrearAdmin extends Component {
             password: this.state.password,
             telefono: this.state.telefono,
             nickname: this.state.nickname,
-            rol_id_rol: this.state.rol_id_rol,
+            rol_id_rol: 1,
         };
 
         fetch('http://localhost:8080/api/usuario', {
@@ -111,16 +111,7 @@ class CrearAdmin extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <div className="form-group col-md-6">
-                        <label htmlFor="nickname">rol</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="id_rol" // Use 'name' instead of 'id'
-                            placeholder="id_rol"
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
+                       
 
                         <button type="submit" className="btn btn-primary">
                             Crear
