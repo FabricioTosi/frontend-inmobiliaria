@@ -9,6 +9,7 @@ import ReservaCreate from './ReservaCreate';
 import Casas from './Casas';
 import CrearUsuario from './CrearUsuario';
 import Usuarios from './Usuarios';
+import MisReservas from './MisReservas';
 import CrearAdmin from './CrearAdmin';
 
 
@@ -20,6 +21,7 @@ function App() {
       <ToastContainer />
       <div className='container'>
         <Routes>
+          <Route path="/MisReservas" element={<MisReservas />}></Route>
           <Route path="/CrearUsuario" element={<CrearUsuario />}></Route>
           <Route path='/CrearAdmin' element={<CrearAdmin />}></Route>
           <Route path="/Casas" element={<Casas />}></Route>

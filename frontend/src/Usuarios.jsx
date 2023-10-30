@@ -12,14 +12,14 @@ const Table = () => {
         email: '',
         telefono: '',
     });
-  
+
 
     useEffect(() => {
         fetchData();
     }, []);
 
-   
-  
+
+
 
     const fetchData = () => {
         fetch('http://localhost:8080/api/usuario')
@@ -62,16 +62,27 @@ const Table = () => {
     };
 
     const handleEdit = (usuario) => {
-        console.log("Selected Usuario: ", usuario);
+        console.log("Selected U suario: ", usuario);
         setSelectedusuario(usuario);
         setEditedusuario({ ...usuario });
 
         setShowModal(true);
     };
-    
     const handleSave = () => {
         console.log('Datos editados:', editedusuario); // Agregar esta línea para imprimir los datos editados en la consola
-        
+
+        // Convertir 'telefono' a un número
+        const telefonoValue = parseFloat(editedusuario.telefono);
+
+        // Verificar si el valor es un número válido
+        if (isNaN(telefonoValue)) {
+            console.error('El valor de teléfono no es un número válido.');
+            return;
+        }
+
+        // Actualizar el campo 'telefono' en 'editedusuario' con el valor numérico
+        setEditedusuario({ ...editedusuario, telefono: telefonoValue });
+console.log(setEditedusuario);
         fetch(`http://localhost:8080/api/usuario/${selectedusuario.id_usuario}`, {
             method: 'PUT',
             headers: {
@@ -93,6 +104,7 @@ const Table = () => {
                 console.error('Error saving data:', error);
             });
     };
+
 
     return (
         <>
@@ -152,14 +164,15 @@ const Table = () => {
                                 />
                             </Form.Group>
 
-                            <Form.Group> 
+                            <Form.Group>
                                 <Form.Label>Telefono</Form.Label>
                                 <Form.Control
                                     type="number"
                                     value={editedusuario.telefono}
-                                    onChange={(e) => setEditedusuario({ ...editedusuario, telefono: e.target.value })}
+                                    onChange={(e) => setEditedusuario({ ...editedusuario, telefono: parseInt(e.target.value, 10) })}
                                 />
                             </Form.Group>
+
 
                         </Form>
                     </Modal.Body>
